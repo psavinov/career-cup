@@ -48,7 +48,6 @@ public class AlphabetMapping {
 		for (int k = 0; k < string.length() - 1; k++) {
 			int part = Integer.parseInt(string.substring(k, k + 2));
 			if (part > 0 && part <= ALPHABET) {
-				count++;
 				count += subCount(string, k);
 			}
 		}
@@ -57,11 +56,10 @@ public class AlphabetMapping {
 	}
 
 	private static int subCount(String string, int k) {
-		int subCount = 0;
+		int subCount = 1;
 		for (int q = k + 2; q < string.length() - 1; q++) {
 			int near = Integer.parseInt(string.substring(q, q + 2));
 			if (near > 0 && near <= ALPHABET) {
-				subCount++;
 				subCount += subCount(string, q);
 			}
 		}
