@@ -24,16 +24,16 @@
 public class Dependencies {
 
 	public static void main(String[] args) {
-		
+
 		/* normal case */
 		System.out.print("Normal case: ");
-		System.out.println(buildOrder(
-				new String[] { "a-b", "b-c", "b-d", "c-d"}));
+		System.out
+				.println(buildOrder(new String[] { "a-b", "b-c", "b-d", "c-d" }));
 
 		/* circular dependencies */
 		System.out.println();
-		System.out.println(buildOrder(
-				new String[] { "a-b", "b-c", "c-a", "b-d", "c-d"}));
+		System.out.println(buildOrder(new String[] { "a-b", "b-c", "c-a",
+				"b-d", "c-d" }));
 
 	}
 
@@ -56,13 +56,13 @@ public class Dependencies {
 				if (weights[q] == w) {
 					if (!out.toString().contains(parts[1].concat(","))) {
 						out.append(parts[1]);
-						if (w<maxWeight) {
+						if (w < maxWeight) {
 							out.append(", ");
 						}
 					}
 					if (!out.toString().contains(parts[0].concat(","))) {
 						out.append(parts[0]);
-						if (w<maxWeight) {
+						if (w < maxWeight) {
 							out.append(", ");
 						}
 					}
@@ -74,7 +74,8 @@ public class Dependencies {
 		return out.toString();
 	}
 
-	private static int calcWeight(String current, String[] deps, StringBuffer path) {
+	private static int calcWeight(String current, String[] deps,
+			StringBuffer path) {
 		int weight = 1;
 		String[] pair = current.split("-");
 		if (pair.length != 2) {
@@ -93,15 +94,14 @@ public class Dependencies {
 			}
 
 			if (!dep.equals(current) && !path.toString().contains(dep)) {
-				if (elements[0].equals(pair[1]) || elements[0]
-						.equals(pair[0])) {
+				if (elements[0].equals(pair[1]) || elements[0].equals(pair[0])) {
 					weight++;
 					path.append("->").append(dep);
 					circle = circle && lastEnd.equals(elements[0]);
 					weight += calcWeight(dep, deps, path);
 					lastEnd = elements[1];
 				}
-				
+
 				if (path.charAt(0) == path.charAt(path.length() - 1) && circle) {
 					throw new IllegalStateException(
 							"Circular dependencies: ".concat(path.toString()));
