@@ -8,6 +8,7 @@
  * Pavel Savinov // savinovpa@gmail.com
  *
  */
+
 #include<stdio.h>
 
 int main(void) {
@@ -22,12 +23,13 @@ int main(void) {
 int reverse_number(int input) {
 	int result = 0;
 
-	int rest = input;
 	do {
-		int part = rest % 10;
-		rest /= 10;
-		result = (rest > 0) ? (result+part)*10 : result+part;
-	} while (rest != 0);
+		int part = input % 10;
+		input /= 10;
+		result = (input > 0) ?
+				(result+part)*10 :
+					result+part;
+	} while (input != 0);
 
 	return result;
 }
